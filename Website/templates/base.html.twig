@@ -22,6 +22,33 @@
     <body>
         <ul>
             <li>
+
+                <a href="/electrician">
+                    View Electricians
+                </a>
+            </li>
+            {% if is_granted('ROLE_ADMIN') %}
+            <li>
+                <a href="/">
+                    test role for admin
+                </a>
+            </li>
+            {% endif %}
+            {% if is_granted('ROLE_USER') %}
+                <li>
+                    <a href="">
+                        test role for user
+                    </a>
+                </li>
+            {% endif %}
+            {% if is_granted('ROLE_ELECTRICIAN') %}
+                <li>
+                    <a href="/">
+                        test role for electrician
+                    </a>
+                </li>
+            {% endif %}
+            <li>
                 <a href="/">
                     home
                 </a>

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Qualification index{% endblock %}
+
+{% block body %}
+    <h1>Qualification index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Qualification_Name</th>
+                <th>Expiry_Date</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for qualification in qualifications %}
+            <tr>
+                <td>{{ qualification.id }}</td>
+                <td>{{ qualification.QualificationName }}</td>
+                <td>{{ qualification.ExpiryDate }}</td>
+                <td>
+                    <a href="{{ path('app_qualification_show', {'id': qualification.id}) }}">show</a>
+                    <a href="{{ path('app_qualification_edit', {'id': qualification.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_qualification_new') }}">Create new</a>
+{% endblock %}

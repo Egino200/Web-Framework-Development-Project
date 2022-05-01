@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Qualification{% endblock %}
+
+{% block body %}
+    <h1>Qualification</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ qualification.id }}</td>
+            </tr>
+            <tr>
+                <th>Qualification_Name</th>
+                <td>{{ qualification.QualificationName }}</td>
+            </tr>
+            <tr>
+                <th>Expiry_Date</th>
+                <td>{{ qualification.ExpiryDate }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_qualification_index') }}">back to list</a>
+
+    <a href="{{ path('app_qualification_edit', {'id': qualification.id}) }}">edit</a>
+
+    {{ include('qualification/_delete_form.html.twig') }}
+{% endblock %}

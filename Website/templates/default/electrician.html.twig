@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Electrician Page{% endblock %}
+
+{% block body %}
+
+    <h1>Welcome to our electricians page</h1>
+    <p>
+        Feel free to browse our highly qualified staff
+    </p>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Electrician Name</th>
+            <th>Qualification</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for qualification in qualifications %}
+
+
+            <tr>
+                <td>{{ qualification.user }}</td>
+                <td>{{ qualification.Qualification_Name }}</td>
+            </tr>
+
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+
+{% endblock %}

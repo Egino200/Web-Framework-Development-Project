@@ -2,9 +2,13 @@
 
 namespace App\Controller;
 
+use App\Repository\QualificationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\UserRepository;
+
+
 
 class DefaultController extends AbstractController
 {
@@ -13,6 +17,14 @@ class DefaultController extends AbstractController
     {
         $template = 'default/index.html.twig';
         $argsArray = [];
+
+        return $this->render($template, $argsArray);
+    }
+    #[Route('/electrician', name: 'electrician')]
+    public function electrician(UserRepository $userRepository ,QualificationRepository $qualificationRepository): Response
+    {
+        $template = 'default/electrician.html.twig';
+        $argsArray = ['users'=>$userRepository-> findAll(), 'qualifications' =>$qualificationRepository->findAll()];
 
         return $this->render($template, $argsArray);
     }

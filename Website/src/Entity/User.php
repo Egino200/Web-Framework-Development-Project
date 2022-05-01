@@ -3,6 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -25,6 +28,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string', length: 255)]
     private $role = 'ROLE_USER';
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Qualification::class)]
+    private $qualifications;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Qualification::class)]
+    private $qualification;
+
+    public function __construct()
+    {
+        $this->qualifications = new ArrayCollection();
+        $this->qualification = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -102,5 +117,48 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->role = $role;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Qualifications>
+     */
+    public function getQualifications(): Collection
+    {
+        return $this->qualifications;
+    }
+
+    public function addQualification(Qualification $qualification): self
+    {
+        if (!$this->qualifications->contains($qualification)) {
+            $this->qualifications[] = $qualification;
+            $qualification->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQualification(Qualification $qualification): self
+    {
+        if ($this->qualifications->removeElement($qualification)) {
+            // set the owning side to null (unless already changed)
+            if ($qualification->getUser() === $this) {
+                $qualification->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+       return $this->username;
+    }
+
+    /**
+     * @return Collection<int, Qualification>
+     */
+    public function getQualification(): Collection
+    {
+        return $this->qualification;
     }
 }
