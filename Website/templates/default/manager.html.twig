@@ -8,10 +8,15 @@
     {% endif %}
 {% endfor %}
 
+
 {% block title %}Manager Page{% endblock %}
 
 {% block body %}
+    {% if not is_granted('ROLE_MANAGER') %}
 
+        <p>You are not allowed to access this page. Sorry!</p>
+
+    {% else %}
 
     <h1>Welcome to the manager page</h1>
     <p>
@@ -19,5 +24,5 @@
     </p>
 
     <a href="{{ path('user_delete', {'id': random(userArray)})}} "><img src="{{asset('uploads/redbutton.jpeg')}}"></a>
-
+{% endif %}
 {% endblock %}

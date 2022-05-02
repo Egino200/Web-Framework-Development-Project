@@ -3,6 +3,11 @@
 {% block title %}Qualification{% endblock %}
 
 {% block body %}
+    {% if not is_granted('ROLE_ELECTRICIAN') or not is_granted('ROLE_MANAGER') %}
+
+    <p>You are not allowed to access this page. Sorry!</p>
+
+    {% else %}
     <h1>Qualification</h1>
 
     <table class="table">
@@ -27,4 +32,5 @@
     <a href="{{ path('app_qualification_edit', {'id': qualification.id}) }}">edit</a>
 
     {{ include('qualification/_delete_form.html.twig') }}
+    {% endif %}
 {% endblock %}

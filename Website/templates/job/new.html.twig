@@ -3,9 +3,15 @@
 {% block title %}New Job{% endblock %}
 
 {% block body %}
+    {% if not is_granted('ROLE_ELECTRICIAN') or not is_granted('ROLE_MANAGER') %}
+
+    <p>You are not allowed to access this page. Sorry!</p>
+
+    {% else %}
     <h1>Create new Job</h1>
 
     {{ include('job/_form.html.twig') }}
 
     <a href="{{ path('app_job_index') }}">back to list</a>
+    {% endif %}
 {% endblock %}

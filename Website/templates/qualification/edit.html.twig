@@ -3,6 +3,11 @@
 {% block title %}Edit Qualification{% endblock %}
 
 {% block body %}
+    {% if not is_granted('ROLE_ELECTRICIAN') or not is_granted('ROLE_MANAGER') %}
+
+    <p>You are not allowed to access this page. Sorry!</p>
+
+    {% else %}
     <h1>Edit Qualification</h1>
 
     {{ include('qualification/_form.html.twig', {'button_label': 'Update'}) }}
@@ -10,4 +15,5 @@
     <a href="{{ path('app_qualification_index') }}">back to list</a>
 
     {{ include('qualification/_delete_form.html.twig') }}
+    {% endif %}
 {% endblock %}

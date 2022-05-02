@@ -3,6 +3,11 @@
 {% block title %}Job index{% endblock %}
 
 {% block body %}
+    {% if not is_granted('ROLE_ELECTRICIAN') or not is_granted('ROLE_MANAGER') %}
+
+    <p>You are not allowed to access this page. Sorry!</p>
+
+    {% else %}
     <h1>Job index</h1>
 
     <table class="table">
@@ -36,4 +41,5 @@
     </table>
 
     <a href="{{ path('app_job_new') }}">Create new</a>
+    {% endif %}
 {% endblock %}
