@@ -34,9 +34,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Qualification::class)]
     private $qualification;
 
+    #[ORM\OneToMany(mappedBy: 'electrician', targetEntity: Job::class)]
+    private $jobs;
+
     public function __construct()
     {
         $this->qualification = new ArrayCollection();
+        $this->jobs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -151,5 +155,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getQualification(): Collection
     {
         return $this->qualification;
+    }
+
+    /**
+     * @return Collection<int, Job>
+     */
+    public function getJobs(): Collection
+    {
+        return $this->jobs;
+    }
+
+    public function addJob(Job $job): self
+    {
+        if (!$this->jobs->contains($job)) {
+            $this->jobs[] = $job;
+            $job->setElectrician($this);
+        }
+
+        return $this;
+    }
+
+    public function removeJob(Job $job): self
+    {
+        if ($this->jobs->removeElement($job)) {
+            // set the owning side to null (unless already changed)
+            if ($job->getElectrician() === $this) {
+                $job->setElectrician(null);
+            }
+        }
+
+        return $this;
     }
 }
