@@ -23,14 +23,14 @@
         <ul>
             <li>
                 <a href="{{ path('electrician') }}">
-                    View Electricians
+                    View Our Electricians
                 </a>
             </li>
-            
+
             {% if is_granted('ROLE_USER') %}
                 <li>
                     <a href="{{ path('portfolio') }}">
-                        Check out our work
+                        See Our Portfolio
                     </a>
                 </li>
 
@@ -38,15 +38,20 @@
             {% if is_granted('ROLE_MANAGER') %}
                 <li>
                     <a href="{{ path('manager') }}">
-                        Important manager functions
+                        Ban a User
                     </a>
                 </li>
 
             {% endif %}
             {% if is_granted('ROLE_ELECTRICIAN') %}
                 <li>
+                    <a href="{{ path('app_qualification_index') }}">
+                        Update Qualifications
+                    </a>
+                </li>
+                <li>
                     <a href="{{ path('app_job_index') }}">
-                        Upload your completed jobs here
+                       Upload To PortFolio
                     </a>
                 </li>
             {% endif %}
