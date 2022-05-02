@@ -38,4 +38,21 @@ class DefaultController extends AbstractController
         return $this->render($template, $argsArray);
     }
 
+    #[Route('/manager', name: 'manager')]
+    public function manager(UserRepository $userRepository): Response
+    {
+        $template = 'default/manager.html.twig';
+        $argsArray = ['users'=>$userRepository-> findAll()];
+
+        return $this->render($template, $argsArray);
+    }
+    #[Route('/fireSomeone', name: 'fireSomeone')]
+    public function fireSomeone(): Response
+    {
+        $template = 'default/manager.html.twig';
+        $argsArray = [];
+
+        return $this->render($template, $argsArray);
+    }
+
 }
