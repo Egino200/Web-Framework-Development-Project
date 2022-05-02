@@ -29,15 +29,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 255)]
     private $role = 'ROLE_USER';
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Qualification::class)]
-    private $qualifications;
+
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Qualification::class)]
     private $qualification;
 
     public function __construct()
     {
-        $this->qualifications = new ArrayCollection();
         $this->qualification = new ArrayCollection();
     }
 
@@ -119,13 +117,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Qualifications>
-     */
-    public function getQualifications(): Collection
-    {
-        return $this->qualifications;
-    }
 
     public function addQualification(Qualification $qualification): self
     {

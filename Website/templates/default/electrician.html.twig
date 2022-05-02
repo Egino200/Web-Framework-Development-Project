@@ -15,21 +15,29 @@
         <tr>
             <th>Electrician Name</th>
             <th>Qualification</th>
+            <th>Qualification Expiry Date</th>
         </tr>
         </thead>
         <tbody>
-        {% for qualification in qualifications %}
+        {% for user in users %}
 
+        {% if user.role == 'ROLE_ELECTRICIAN' %}
+            <col>
+            <td>{{ user.username }}</td>
+                {% for qualification in user.qualification %}
 
-            <tr>
-                <td>{{ qualification.user }}</td>
-                <td>{{ qualification.Qualification_Name }}</td>
+                    <td>{{ qualification.QualificationName }}</td>
+                    <td>{{ qualification.ExpiryDate }}</td>
+                    <tr> </tr>
+                    <td></td>
+                {% endfor %}
             </tr>
-
+         {%endif%}
         {% else %}
             <tr>
                 <td colspan="5">no records found</td>
             </tr>
+
         {% endfor %}
         </tbody>
     </table>
