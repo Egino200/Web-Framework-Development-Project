@@ -34,7 +34,7 @@ class JobController extends AbstractController
             $uploadedFile = $form['fileName']->getData();
             $destination = $this->getParameter('kernel.project_dir').'/public/uploads';
             $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
-            $newFilename =$originalFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
+            $newFilename ='uploads/'.$originalFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
             $uploadedFile->move(
                 $destination,
                 $newFilename

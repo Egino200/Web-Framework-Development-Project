@@ -23,7 +23,7 @@
         <ul>
             <li>
 
-                <a href="/electrician">
+                <a href="{{ path('electrician') }}">
                     View Electricians
                 </a>
             </li>
@@ -36,15 +36,16 @@
             {% endif %}
             {% if is_granted('ROLE_USER') %}
                 <li>
-                    <a href="">
-                        Create Job Listing
+                    <a href="{{ path('portfolio') }}">
+                        Check out our work
                     </a>
                 </li>
+
             {% endif %}
             {% if is_granted('ROLE_ELECTRICIAN') %}
                 <li>
-                    <a href="/">
-                        test role for electrician
+                    <a href="{{ path('app_job_index') }}">
+                        Upload your completed jobs here
                     </a>
                 </li>
             {% endif %}

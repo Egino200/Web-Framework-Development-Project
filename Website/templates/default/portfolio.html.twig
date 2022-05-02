@@ -10,6 +10,13 @@
     </p>
 
 
+    {% for job in jobs %}
+        <div>
+            <img src="{{asset(job.fileName)}}">
+            <H1>{{ job.location }}</H1>
+            <p>This job was completed by {{ job.electrician }}</p>
+        </div>
+    {% endfor %}
 
 
 

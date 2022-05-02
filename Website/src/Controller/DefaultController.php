@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\JobRepository;
 use App\Repository\QualificationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,4 +29,13 @@ class DefaultController extends AbstractController
 
         return $this->render($template, $argsArray);
     }
+    #[Route('/portfolio', name: 'portfolio')]
+    public function portfolio(JobRepository $jobRepository ): Response
+    {
+        $template = 'default/portfolio.html.twig';
+        $argsArray = ['jobs'=>$jobRepository-> findAll()];
+
+        return $this->render($template, $argsArray);
+    }
+
 }
