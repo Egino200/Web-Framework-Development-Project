@@ -3,9 +3,13 @@
 {% block title %}home page{% endblock %}
 
 {% block body %}
+    {% if not is_granted('ROLE_USER')  %}
+
+        <p>You are not allowed to access this page. Sorry!</p>
+
+    {% else %}
 
 
-    <p>You are not allowed to access this page. Sorry!</p>
 
     <h1>Welcome to the portfolio page</h1>
     <p>
