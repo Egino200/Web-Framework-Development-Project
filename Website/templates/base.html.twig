@@ -27,7 +27,7 @@
                 </a>
             </li>
 
-            {% if is_granted('ROLE_USER') %}
+            {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
                 <li>
                     <a href="{{ path('portfolio') }}">
                         See Our Portfolio
@@ -35,7 +35,7 @@
                 </li>
 
             {% endif %}
-            {% if is_granted('ROLE_MANAGER') %}
+            {% if is_granted('ROLE_MANAGER')or is_granted('ROLE_ADMIN') %}
                 <li>
                     <a href="{{ path('manager') }}">
                         Ban a User
@@ -43,7 +43,7 @@
                 </li>
 
             {% endif %}
-            {% if is_granted('ROLE_ELECTRICIAN') %}
+            {% if is_granted('ROLE_ELECTRICIAN') or is_granted('ROLE_ADMIN')%}
                 <li>
                     <a href="{{ path('app_qualification_index') }}">
                         Update Qualifications

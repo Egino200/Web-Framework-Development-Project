@@ -3,11 +3,8 @@
 {% block title %}home page{% endblock %}
 
 {% block body %}
-    {% if not is_granted('ROLE_USER')  %}
+    {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
 
-        <p>You are not allowed to access this page. Sorry!</p>
-
-    {% else %}
 
 
 
@@ -25,7 +22,8 @@
         </div>
     {% endfor %}
 
-
+        {% else %}
+            <p>You dont have access to this page. Sorry!</p>
 {% endif %}
 {% endblock %}
 

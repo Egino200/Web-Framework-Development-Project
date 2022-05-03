@@ -12,17 +12,19 @@
 {% block title %}Manager Page{% endblock %}
 
 {% block body %}
-    {% if not is_granted('ROLE_MANAGER') %}
+    {% if not is_granted('ROLE_MANAGER') or is_granted('ROLE_ADMIN')%}
 
-        <p>You are not allowed to access this page. Sorry!</p>
 
-    {% else %}
+
+
 
     <h1>Welcome to the manager page</h1>
     <p>
-       from here you can ban any user by clicking this big red button!
+       from here you can ban a random user by clicking this big red button!
     </p>
 
     <a href="{{ path('user_delete', {'id': random(userArray)})}} "><img src="{{asset('uploads/redbutton.jpeg')}}"></a>
+    {% else %}
+        <p>You dont have access to this page. Sorry!</p>
 {% endif %}
 {% endblock %}
