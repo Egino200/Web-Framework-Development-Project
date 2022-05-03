@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\JobRepository;
 use App\Repository\QualificationRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,6 +14,7 @@ use App\Repository\UserRepository;
 
 class DefaultController extends AbstractController
 {
+
     #[Route('/', name: 'index')]
     public function index(): Response
     {
@@ -29,6 +31,7 @@ class DefaultController extends AbstractController
 
         return $this->render($template, $argsArray);
     }
+    #[IsGranted('ROLE_USER')]
     #[Route('/portfolio', name: 'portfolio')]
     public function portfolio(JobRepository $jobRepository ): Response
     {

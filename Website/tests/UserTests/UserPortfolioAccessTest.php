@@ -8,10 +8,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
-
-class ViewElectricianTest extends WebTestCase
+class UserPortfolioAccessTest extends WebTestCase
 {
-    public function testIfUserCanNavigateToElectricianPage(){
+    public function testIfUserCanNavigateToPortfolioPage(){
         $client = static::createClient();
 
         $userName = 'user';
@@ -19,12 +18,10 @@ class ViewElectricianTest extends WebTestCase
         $testUser = $userRepository->findOneByUsername($userName);
         $client->loginUser($testUser);
 
-        $crawler = $client->request('GET', '/electrician');
+        $crawler = $client->request('GET', '/portfolio');
 
         $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('h1', "Welcome to our electricians page");
+        $this->assertSelectorTextContains('h1', "Welcome to the portfolio page");
 
     }
-
-
 }

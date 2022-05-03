@@ -10,19 +10,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 
-class UserRoleTest extends WebTestCase
+class NoRoleElectricianAccessTest extends WebTestCase
 {
-    public function testHomePageTitleText(): void{
+
+    public function testIfNoRoleCanAccessElectricianPage(): void{
         $client = static::createClient();
-        $crawler = $client->request('GET','/');
+        $crawler = $client->request('GET','/electrician');
 
         $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('h1', 'Welcome to Egino.Co');
-
+        $this->assertSelectorTextContains('h1', 'Welcome to our electricians page');
     }
-
-
-
 
 
 }
