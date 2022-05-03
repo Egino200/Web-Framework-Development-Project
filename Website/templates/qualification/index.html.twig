@@ -3,11 +3,12 @@
 {% block title %}Qualification index{% endblock %}
 
 {% block body %}
-    {% if not is_granted('ROLE_ELECTRICIAN') or not is_granted('ROLE_MANAGER') %}
 
-    <p>You are not allowed to access this page. Sorry!</p>
 
-    {% else %}
+
+
+
+    {% if is_granted('ROLE_ELECTRICIAN') or is_granted('ROLE_MANAGER') or is_granted('ROLE_ADMIN') %}
     <h1>Qualification index</h1>
 
     <table class="table">
@@ -39,5 +40,7 @@
     </table>
 
     <a href="{{ path('app_qualification_new') }}">Create new</a>
+    {% else %}
+        <p>You are not allowed to access this page. Sorry!</p>
     {% endif %}
 {% endblock %}

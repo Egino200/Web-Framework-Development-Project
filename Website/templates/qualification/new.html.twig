@@ -3,15 +3,17 @@
 {% block title %}New Qualification{% endblock %}
 
 {% block body %}
-    {% if not is_granted('ROLE_ELECTRICIAN') or not is_granted('ROLE_MANAGER') %}
 
-    <p>You are not allowed to access this page. Sorry!</p>
 
-    {% else %}
+    {% if is_granted('ROLE_ELECTRICIAN') or is_granted('ROLE_MANAGER') or is_granted('ROLE_ADMIN') %}
+
+
     <h1>Create new Qualification</h1>
 
     {{ include('qualification/_form.html.twig') }}
 
     <a href="{{ path('app_qualification_index') }}">back to list</a>
+    {% else %}
+        <p>You are not allowed to access this page. Sorry!</p>
     {% endif %}
 {% endblock %}
