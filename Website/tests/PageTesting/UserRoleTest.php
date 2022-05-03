@@ -21,25 +21,9 @@ class UserRoleTest extends WebTestCase
 
     }
 
-  /*  public function testAccessDeniedForRoleUserWhenTryAccessModuleCrud(): void
-    {
-        $client = static::createClient();
-        $client->followRedirects();
-        $client->catchExceptions(true);
 
-        // login as ROLE_USER user
-        $username = 'user';
-        $userRepository = static::getContainer()->get(UserRepository::class);
-        $testUser = $userRepository->findOneByUsername($username);
-        $client->loginUser($testUser);
 
-//        $this->expectException(AccessDeniedHttpException::class);
 
-        $crawler = $client->request('GET', '/user');
-        $statusCode = $client->getResponse()->getStatusCode();
 
-        $this->assertSame(Response::HTTP_FORBIDDEN, $statusCode);
-    }
-*/
 }
 
