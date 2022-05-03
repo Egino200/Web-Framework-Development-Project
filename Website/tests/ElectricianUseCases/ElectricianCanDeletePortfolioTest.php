@@ -6,41 +6,42 @@ namespace App\Tests\ElectricianUseCases;
 
 use App\Repository\QualificationRepository;
 use App\Repository\UserRepository;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class ElectricianCanDeletePortfolioTest
+class ElectricianCanDeletePortfolioTest extends WebTestCase
 {
-    public function testRoleAdminCanCreateSolicitors(){
+    public function testRoleElectricianCanCreateQualifications(){
         $client = static::createClient();
         $client->followRedirects();
+
+
 
         $qualificationRepository = static::getContainer()->get(QualificationRepository::class);
         $userRepository = static::getContainer()->get(UserRepository::class);
 
         $userName = 'electrician';
-        $electricianName = $userRepository->findOneByusername($userName);
+        $electrician = $userRepository->findOneByusername($userName);
 
         $Qualification_Name = 'Manual Handling';
         $qualification = $qualificationRepository->findOneBy(['Qualification_Name'=>$Qualification_Name]);
 
+
         $httpMethod = 'GET';
-        $url = '/qualification/new';
+        $url = '/qualification/'.$electrician->getId().'/edit';
 
-        $qualification = $qualificationRepository->findAll();
-        $numberOfQualificationsBeforeOneCreated = count($qualification);
-        $expectedNumberOfQualificationsAfterOneCreated = $numberOfQualificationsBeforeOneCreated + 1;
 
-        $client->loginUser($electricianName);
+        $client->loginUser($electrician);
 
-        $submitButtonName = 'Save';
+        $submitButtonName = 'Update';
         $client->submit($client->request($httpMethod, $url)->selectButton($submitButtonName)->form([
-            'qualification[Qualification_Name]'  => 'Test',
-            'qualification[Expiry_Date]'  => '12/12/1212',
-            'qualification[user]'  => "5",
+            'qualification[Qualification_Name]'  => 'editedTest',
+            'qualification[Expiry_Date]'  => '22/22/2222',
+            'qualification[user]'  => $electrician->getId(),
         ]));
 
-        $qualification = $qualificationRepository->findAll();
+       $editedObject= $qualificationRepository->findOneBy(['Qualification_Name'=> 'editedTest']);
 
-        $this->assertCount($expectedNumberOfQualificationsAfterOneCreated, $qualification);
+        $this->assertNotSame($electrician,$editedObject);
     }
 
 

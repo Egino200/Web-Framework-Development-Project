@@ -41,7 +41,7 @@ class ElectricianCanCreatePortFolioTest extends WebTestCase
         $client->submit($client->request($httpMethod, $url)->selectButton($submitButtonName)->form([
             'qualification[Qualification_Name]'  => 'Test',
             'qualification[Expiry_Date]'  => '12/12/1212',
-            'qualification[user]'  => "5",
+            'qualification[user]'  => $electricianName->getId(),
         ]));
 
         $qualification = $qualificationRepository->findAll();
